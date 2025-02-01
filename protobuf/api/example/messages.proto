@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+// Пакет обязательно должен иметь уникальное название в рамках вашего проекта.
+package api.example;
+
+// Если используете монорепозиторий для protobuf контрактов, то все пакеты
+// также должны быть уникальные.
+// Название пакета лучше всего формировать как путь до него.
+// package github.moguchev.grpc.protobuf.api.example;
+
+import "buf/validate/validate.proto";
+
+option go_package = "github/moguchev/grpc/protobuf/pkg/api/example";
+
+// CreatePostRequest - запрос CreatePost
+message CreatePostRequest {
+  // title - название поста
+  string title = 1 [
+    json_name = "title",
+    (buf.validate.field).string = {
+      min_len: 3
+      max_len: 256
+    }
+  ];
+  // author_id - id автора поста
+  string author_id = 2 [
+    json_name = "author_id",
+    (buf.validate.field).string.min_len = 1
+  ];
+  // content - содержание статьи
+  string content = 3 [
+    json_name = "content",
+    (buf.validate.field).string = {
+      min_len: 1
+      max_len: 2048
+    }
+  ];
+}
+
+// CreatePostResponse - ответ CreatePost
+message CreatePostResponse {
+  // post_id - id созданного поста
+  uint64 post_id = 1 [json_name = "post_id"];
+}
+
+// ListPostsRequest - запрос
+//
+// Даже если запрос пустой, не стоит
+// использовать другие сообщения типа Empty
+message ListPostsRequest {}
+
+// ListPostsResponse - ответ
+message ListPostsResponse {}

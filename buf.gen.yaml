@@ -1,0 +1,22 @@
+# Подробнее: https://buf.build/docs/configuration/v2/buf-gen-yaml
+version: v2
+managed:
+  # 'enabled: true' turns managed mode on, 'enabled: false' ignores all managed mode options.
+  enabled: true # default: false
+  disable:
+    # Don't modify any files in vendor.protobuf
+    - path: vendor.protobuf
+plugins:
+  # protoc-gen-go - генерация go типов для message и enum (https://github.com/protocolbuffers/protobuf-go)
+  - local: protoc-gen-go
+    out: pkg
+    opt:
+      - paths=source_relative
+  # protoc-gen-go-grpc - генерация grpc сервиса и клиента (https://github.com/grpc/grpc-go)
+  - local: protoc-gen-go-grpc
+    out: pkg
+    opt:
+      - paths=source_relative
+inputs:
+  - directory: protobuf # путь до наших protobuf файлов
+

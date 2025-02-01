@@ -1,0 +1,17 @@
+# For details on buf.yaml configuration, visit https://buf.build/docs/configuration/v2/buf-yaml
+version: v2
+modules:
+  - path: protobuf
+  - path: vendor.protobuf
+# https://buf.build/docs/lint/overview/#defaults-and-configuration
+lint:
+  use:
+    - STANDARD # Omit all Buf categories if you don't want to use Buf's built-in rules
+  except:
+    - PACKAGE_VERSION_SUFFIX
+  ignore:
+    - vendor.protobuf
+  service_suffix: Service
+breaking:
+  use:
+    - FILE

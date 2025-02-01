@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+// package github.moguchev.grpc.protobuf.api.example;
+package api.example;
+
+import "api/example/messages.proto";
+
+option go_package = "github/moguchev/grpc/protobuf/pkg/api/example";
+
+// ExampleService - сервис пример
+service ExampleService {
+  // CreatePost - метод создани постов
+  rpc CreatePost(CreatePostRequest) returns (CreatePostResponse);
+  // ListPosts - метод получения постов
+  rpc ListPosts(ListPostsRequest) returns (ListPostsResponse);
+}
